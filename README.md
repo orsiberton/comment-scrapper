@@ -24,9 +24,11 @@ First, install the requirements.txt file
 
 Then:
 ```
+API_BASE={YOUR API BASE}
+API_KEY={YOUR API KEY}
 python main.py -u {USERNAME} -p {PERSONAL_ACCESS_TOKEN} -pr {FULL_PR_LINK}
 ```
-OBS: You can pass multiple `-pr parameters to the script.
+OBS: You can pass multiple `-pr` parameters to the script.
 
 ## Notes
 
