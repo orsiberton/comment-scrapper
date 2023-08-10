@@ -21,7 +21,18 @@ def classify_comments(comments):
     for item in categorized_comments:
         print(f"Comment: {item.get_comment().get_text()}\nCategory: {item.get_category()}\n")
 
-    analyzer = Analyzer()
+    analyze_comments(categorized_comments)
+
+
+def analyze_comments(categorized_comments):
+    path = 'src/charts'
+    if not os.path.exists(path):
+        os.mkdir(path)
+        print(f'Folder {path} created!')
+    else:
+        print(f'Folder {path} already exists')
+
+    analyzer = Analyzer(path)
     analyzer.analyze(categorized_comments)
 
 

@@ -5,16 +5,15 @@ from domain.CategorizedComment import CategorizedComment
 
 
 class Analyzer:
-    def __init__(self):
-        pass
+    def __init__(self, path: str):
+        self._path = path
 
     def analyze(self, categorized_comments: list[CategorizedComment]):
-        # self._plot_category_bar_chart(categorized_comments)
-        # self._plot_time_spent_bar_chart(categorized_comments)
+        self._plot_category_bar_chart(categorized_comments)
+        self._plot_time_spent_bar_chart(categorized_comments)
         pass
 
-    @staticmethod
-    def _plot_category_bar_chart(categorized_comments):
+    def _plot_category_bar_chart(self, categorized_comments):
         data = [c.to_dict() for c in categorized_comments]
         df = pd.DataFrame(data)
         category_counts = df['category'].value_counts()
@@ -24,11 +23,10 @@ class Analyzer:
         plt.title("Frequency of Categories")
         plt.ylabel("Number of Comments")
         plt.xlabel("Category")
-        plt.savefig('comment-scrapper/charts/category-bar-chart.png')
+        plt.savefig(f'{self._path}/category-bar-chart.png')
         plt.clf()
 
-    @staticmethod
-    def _plot_time_spent_bar_chart(categorized_comments):
+    def _plot_time_spent_bar_chart(self, categorized_comments):
         data = [c.to_dict() for c in categorized_comments]
 
         # Aggregate time spent in each category
@@ -46,5 +44,5 @@ class Analyzer:
         plt.title('Time Spent in Each Category')
         plt.xlabel('Category')
         plt.ylabel('Time Spent(H)')
-        plt.savefig('comment-scrapper/charts/time-spent-bar-chart.png')
+        plt.savefig(f'{self._path}/time-spent-bar-chart.png')
         plt.clf()
