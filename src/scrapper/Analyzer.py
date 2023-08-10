@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
+from config.Logger import logger
 from domain.CategorizedComment import CategorizedComment
 
 
@@ -14,6 +15,7 @@ class Analyzer:
         pass
 
     def _plot_category_bar_chart(self, categorized_comments):
+        logger.info('Plotting category bar chart')
         data = [c.to_dict() for c in categorized_comments]
         df = pd.DataFrame(data)
         category_counts = df['category'].value_counts()
@@ -27,6 +29,7 @@ class Analyzer:
         plt.clf()
 
     def _plot_time_spent_bar_chart(self, categorized_comments):
+        logger.info('Plotting time spent bar chart')
         data = [c.to_dict() for c in categorized_comments]
 
         # Aggregate time spent in each category

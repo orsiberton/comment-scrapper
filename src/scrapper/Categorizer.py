@@ -1,5 +1,6 @@
 import openai
 
+from config.Logger import logger
 from domain.CategorizedComment import CategorizedComment
 from domain.Comment import Comment
 
@@ -33,6 +34,7 @@ class Categorizer:
         # Classify comments using OpenAI API
         categorized_comments = []
         for comment in comments:
+            logger.info(f'Classifying comment: {comment.get_text()}')
             response = openai.Completion.create(
                 engine="gpt-35-turbo",
                 prompt=self.PROMPT.format(comment=comment.get_text()),
@@ -43,8 +45,10 @@ class Categorizer:
                 presence_penalty=0,
                 stop=["\n"]
             )
-            print(response)
             category = response.choices[0].text.strip()
+
+            logger.info(f'Comment classified as: {category}')
+
             categorized_comments.append(CategorizedComment(comment, category))
 
         return categorized_comments
