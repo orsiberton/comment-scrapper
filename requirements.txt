@@ -1,0 +1,4 @@
+openai
+matplotlib
+pandas
+requests
